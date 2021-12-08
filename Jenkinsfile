@@ -85,19 +85,19 @@ pipeline {
 	 echo "USER=$USER JOB_NAME=$JOB_NAME" >> ${report_file}
          echo "Build Number $BUILD_NUMBER" >> ${report_file}
 	 echo "$LANGUAGE"
-         if [$LANGUAGE=='C'] || [$LANGUAGE=='All']
+         if [$LANGUAGE=='C']
 	 then
-            echo "Only c file was excuted" >> ${report_file}
+            echo "Only c file was executed" >> ${report_file}
             echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
          fi
-         if [$LANGUAGE=='Python'] || [$LANGUAGE=='All']
+         if [$LANGUAGE=='Python']
 	 then
-            echo "Only python file was excuted" >> ${report_file}
+            echo "Only python file was executed" >> ${report_file}
             echo "Python lang results $(cat "${WORKSPACE}/scripts/results_python_program")" >> ${report_file}
          fi
-         if [$LANGUAGE=='Bash'] || [$LANGUAGE=='All']
+         if [$LANGUAGE=='Bash']
 	 then
-            echo "Only bash file was excuted" >> ${report_file}
+            echo "Only bash file was executed" >> ${report_file}
             echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
          fi
 
