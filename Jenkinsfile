@@ -70,9 +70,8 @@ pipeline {
             '''
          }
       }
-      stage('Saving Results') {
+stage('Saving Results') {
          steps {
-	script {
             echo 'Saving Results process..'
             sh '''
 	      report_file="${HOME}/Documents/Deployment/report"
@@ -85,46 +84,32 @@ pipeline {
 	 date >> ${report_file}
 	 echo "USER=$USER JOB_NAME=$JOB_NAME" >> ${report_file}
          echo "Build Number $BUILD_NUMBER" >> ${report_file}
-	 '''
-	
-		if (LANGUAGE=="ALL"){
-		sh '''
-			report_file="${HOME}/Documents/Deployment/report"
-			echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
-	     		echo "Python lang results" >> ${report_file}
-	     		cat "${WORKSPACE}/scripts/results_python_program" >> ${report_file}
-	     		echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
-		'''
-	}
-	else if (LANGUAGE=="C"){
-			 sh '''
-			 	report_file="${HOME}/Documents/Deployment/report"
-			 	 echo "Only c file was executed" >> ${report_file}
-            			 echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
-			 '''
-	}
-	else if (LANGUAGE=="Python"){
-			 sh '''
-			 	report_file="${HOME}/Documents/Deployment/report"
-			 	echo "Only python file was executed" >> ${report_file}
-            			echo "Python lang results" >> ${report_file}
-	    			cat "${WORKSPACE}/scripts/results_python_program" >> ${report_file}
-			 '''
-	} 
-	else if (LANGUAGE=="Bash"){
-			 sh '''
-			 	report_file="${HOME}/Documents/Deployment/report"
-			 	echo "Only bash file was executed" >> ${report_file}
-            			echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
-			 '''
-	}
-	}
-
-	    sh '''
-	    	report_file="${HOME}/Documents/Deployment/report"
+	 case "$LANGUAGE" in
+	 'All')
+	 	     echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
+	     echo "Python lang results" >> ${report_file}
+	     cat "${WORKSPACE}/scripts/results_python_program" >> ${report_file}
+	     echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
+	     ;;
+	 'C')
+            echo "Only c file was executed" >> ${report_file}
+            echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
+	    ;;
+         
+         'Python')
+            echo "Only python file was executed" >> ${report_file}
+            echo "Python lang results" >> ${report_file}
+	    cat "${WORKSPACE}/scripts/results_python_program" >> ${report_file}
+	    ;;
+         
+         'Bash')
+            echo "Only bash file was executed" >> ${report_file}
+            echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
+	    ;;
+	  esac
 	      echo "#############################" >> ${report_file}
             '''
+         }
       }
-   }
   }
 }
