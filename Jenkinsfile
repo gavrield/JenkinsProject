@@ -89,13 +89,13 @@ pipeline {
 	 then
             echo "Only c file was executed" >> ${report_file}
             echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
-         fi
-         if [ $LANGUAGE=='Python' ]
+         
+         elif [ $LANGUAGE=='Python' ]
 	 then
             echo "Only python file was executed" >> ${report_file}
             echo "Python lang results $(cat "${WORKSPACE}/scripts/results_python_program")" >> ${report_file}
-         fi
-         if [ $LANGUAGE=='Bash' ]
+         
+         elif [ $LANGUAGE=='Bash' ]
 	 then
             echo "Only bash file was executed" >> ${report_file}
             echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
