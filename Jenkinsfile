@@ -85,7 +85,8 @@ pipeline {
 	 echo "USER=$USER JOB_NAME=$JOB_NAME" >> ${report_file}
          echo "Build Number $BUILD_NUMBER" >> ${report_file}
 	 '''
-	if (${LANGUAGE}=="ALL"){
+	script {
+			if (${LANGUAGE}=="ALL"){
 		sh '''
 			echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
 	     		echo "Python lang results" >> ${report_file}
@@ -112,6 +113,8 @@ pipeline {
             			echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
 			 '''
 	}
+	}
+
 	    sh '''
 	      echo "#############################" >> ${report_file}
             '''
