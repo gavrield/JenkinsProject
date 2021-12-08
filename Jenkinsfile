@@ -48,6 +48,7 @@ pipeline {
          steps{
             sh '''
                echo "executing Python file"
+	       cd "${WORKSPACE}/scripts
                ./trianglePrint.py $PY_PARAM
                ./trianglePrint.py $PY_PARAM > results_python_program
             '''
@@ -63,6 +64,7 @@ pipeline {
          steps{
             sh '''
                echo "executing Bash file"
+	       cd "${WORKSPACE}/scripts
                ./reverse_word.sh $BASH_PARAM
                ./reverse_word.sh $BASH_PARAM > results_bash_program
             '''
