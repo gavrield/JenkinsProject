@@ -72,6 +72,7 @@ pipeline {
       }
       stage('Saving Results') {
          steps {
+	script {
             echo 'Saving Results process..'
             sh '''
 	      report_file="${HOME}/Documents/Deployment/report"
@@ -85,7 +86,7 @@ pipeline {
 	 echo "USER=$USER JOB_NAME=$JOB_NAME" >> ${report_file}
          echo "Build Number $BUILD_NUMBER" >> ${report_file}
 	 '''
-	script {
+	
 		if (LANGUAGE=="ALL"){
 		sh '''
 			report_file="${HOME}/Documents/Deployment/report"
