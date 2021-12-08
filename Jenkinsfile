@@ -34,7 +34,7 @@ pipeline {
                cd "${WORKSPACE}/scripts"
                gcc uppercase_word.c
                ./a.out $C_PARAM
-               ./a.out > results_c_program
+               ./a.out $C_PARAM> results_c_program
             '''
          }
       }
