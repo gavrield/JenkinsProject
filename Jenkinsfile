@@ -12,7 +12,7 @@ pipeline {
             echo 'Build process..'            
             sh '''
                 cd "${WORKSPACE}/scripts/"
-                chmod 755 *.py, *.sh
+                chmod 755 *.py *.sh
             '''
          }
       }      
