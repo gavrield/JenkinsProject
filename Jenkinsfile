@@ -85,7 +85,7 @@ pipeline {
 	 echo "USER=$USER JOB_NAME=$JOB_NAME" >> ${report_file}
          echo "Build Number $BUILD_NUMBER" >> ${report_file}
 	 echo "$LANGUAGE"
-	 if [ $LANGUAGE == 'All' ]
+	 if [ $LANGUAGE=='All' ]
 	 then
 	     echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
 	     echo "Python lang results" >> ${report_file}
