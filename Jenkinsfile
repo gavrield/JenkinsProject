@@ -84,30 +84,35 @@ pipeline {
 	 date >> ${report_file}
 	 echo "USER=$USER JOB_NAME=$JOB_NAME" >> ${report_file}
          echo "Build Number $BUILD_NUMBER" >> ${report_file}
-	 echo "$LANGUAGE"
-	 if [ $LANGUAGE=='All' ]
-	 then
-	     echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
-	     echo "Python lang results" >> ${report_file}
-	     cat "${WORKSPACE}/scripts/results_python_program" >> ${report_file}
-	     echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
-         elif [ $LANGUAGE=='C' ]
-	 then
-            echo "Only c file was executed" >> ${report_file}
-            echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
-         
-         elif [ $LANGUAGE=='Python' ]
-	 then
-            echo "Only python file was executed" >> ${report_file}
-            echo "Python lang results" >> ${report_file}
-	    cat "${WORKSPACE}/scripts/results_python_program" >> ${report_file}
-         
-         elif [ $LANGUAGE=='Bash' ]
-	 then
-            echo "Only bash file was executed" >> ${report_file}
-            echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
-         fi
-
+	 '''
+	if (LANGUAGE=="ALL"){
+		sh '''
+			echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
+	     		echo "Python lang results" >> ${report_file}
+	     		cat "${WORKSPACE}/scripts/results_python_program" >> ${report_file}
+	     		echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
+		'''
+	}
+		 else if (LANGUAGE=="C"){
+			 sh '''
+			 	 echo "Only c file was executed" >> ${report_file}
+            			 echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
+			 '''
+		 }
+		 else if (LANGUAGE=="Python"){
+			 sh '''
+			 	echo "Only python file was executed" >> ${report_file}
+            			echo "Python lang results" >> ${report_file}
+	    			cat "${WORKSPACE}/scripts/results_python_program" >> ${report_file}
+			 '''
+		 } 
+		 else if (LANGUAGE=="Bash"){
+			 sh '''
+			 	echo "Only bash file was executed" >> ${report_file}
+            			echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
+			 '''
+		 }
+	    sh '''
 	      echo "#############################" >> ${report_file}
             '''
          }
