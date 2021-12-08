@@ -93,30 +93,29 @@ pipeline {
 	     		echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
 		'''
 	}
-		 else if (LANGUAGE=="C"){
+	else if (LANGUAGE=="C"){
 			 sh '''
 			 	 echo "Only c file was executed" >> ${report_file}
             			 echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
 			 '''
-		 }
-		 else if (LANGUAGE=="Python"){
+	}
+	else if (LANGUAGE=="Python"){
 			 sh '''
 			 	echo "Only python file was executed" >> ${report_file}
             			echo "Python lang results" >> ${report_file}
 	    			cat "${WORKSPACE}/scripts/results_python_program" >> ${report_file}
 			 '''
-		 } 
-		 else if (LANGUAGE=="Bash"){
+	} 
+	else if (LANGUAGE=="Bash"){
 			 sh '''
 			 	echo "Only bash file was executed" >> ${report_file}
             			echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
 			 '''
-		 }
+	}
 	    sh '''
 	      echo "#############################" >> ${report_file}
             '''
-         }
       }
-      
    }
+  }
 }
