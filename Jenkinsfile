@@ -84,7 +84,7 @@ pipeline {
 	      date >> ${report_file}
 	      echo "USER=$USER JOB_NAME=$JOB_NAME" >> ${report_file}
          echo "Build Number $BUILD_NUMBER" >> ${report_file}
-
+	 echo "$LANGUAGE"
          if [$LANGUAGE=='C' || $LANGUAGE=='All']; then
             echo "Only c file was excuted" >> ${report_file}
             echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
