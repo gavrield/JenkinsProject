@@ -84,23 +84,18 @@ pipeline {
 	      date >> ${report_file}
 	      echo "USER=$USER JOB_NAME=$JOB_NAME" >> ${report_file}
          echo "Build Number $BUILD_NUMBER" >> ${report_file}
-         if ($LANGUAGE=='All'); then
-            echo "All files were excuted" >> ${report_file}
-            printf("%s: %s", "C lang results","$(cat "${WORKSPACE}/scripts/results_c_program")")>> ${report_file}
-            printf("%s: %s", "Python lang results", "$(cat "${WORKSPACE}/scripts/results_python_program")")>> ${report_file}
-            printf("%s: %s", "Bash lang results", "$(cat "${WORKSPACE}/scripts/results_bash_program")")>> ${report_file}
-         fi
-         if ($LANGUAGE=='C'); then
+
+         if ($LANGUAGE=='C' || $LANGUAGE=='All'); then
             echo "Only c file was excuted" >> ${report_file}
-            printf("%s: %s", "C lang results", "$(cat "${WORKSPACE}/scripts/results_c_program")")>> ${report_file}
+            echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
          fi
-         if ($LANGUAGE=='Python'); then
+         if ($LANGUAGE=='Python' || $LANGUAGE=='All'); then
             echo "Only python file was excuted" >> ${report_file}
-            printf("%s: %s", "Python lang results", "$(cat "${WORKSPACE}/scripts/results_python_program")")>> ${report_file}
+            echo "Python lang results $(cat "${WORKSPACE}/scripts/results_python_program")" >> ${report_file}
          fi
-         if ($LANGUAGE=='Bash'); then
+         if ($LANGUAGE=='Bash' || $LANGUAGE=='All'); then
             echo "Only bash file was excuted" >> ${report_file}
-            printf("%s: %s", "Bash lang results", "$(cat "${WORKSPACE}/scripts/results_bash_program")")>> ${report_file}
+            echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
          fi
 
 	      echo "#############################" >> ${report_file}
