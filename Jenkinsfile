@@ -86,7 +86,7 @@ pipeline {
          echo "Build Number $BUILD_NUMBER" >> ${report_file}
 	 '''
 	script {
-			if (${LANGUAGE}=="ALL"){
+		if (LANGUAGE=="ALL"){
 		sh '''
 			echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
 	     		echo "Python lang results" >> ${report_file}
