@@ -93,7 +93,8 @@ pipeline {
          elif [ $LANGUAGE=='Python' ]
 	 then
             echo "Only python file was executed" >> ${report_file}
-            echo "Python lang results $(cat "${WORKSPACE}/scripts/results_python_program")" >> ${report_file}
+            echo "Python lang results" >> ${report_file}
+	    cat "${WORKSPACE}/scripts/results_python_program" >> ${report_file}
          
          elif [ $LANGUAGE=='Bash' ]
 	 then
