@@ -88,6 +88,7 @@ pipeline {
 	script {
 		if (LANGUAGE=="ALL"){
 		sh '''
+			report_file="${HOME}/Documents/Deployment/report"
 			echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
 	     		echo "Python lang results" >> ${report_file}
 	     		cat "${WORKSPACE}/scripts/results_python_program" >> ${report_file}
@@ -96,12 +97,14 @@ pipeline {
 	}
 	else if (LANGUAGE=="C"){
 			 sh '''
+			 	report_file="${HOME}/Documents/Deployment/report"
 			 	 echo "Only c file was executed" >> ${report_file}
             			 echo "C lang results $(cat "${WORKSPACE}/scripts/results_c_program")">> ${report_file}
 			 '''
 	}
 	else if (LANGUAGE=="Python"){
 			 sh '''
+			 	report_file="${HOME}/Documents/Deployment/report"
 			 	echo "Only python file was executed" >> ${report_file}
             			echo "Python lang results" >> ${report_file}
 	    			cat "${WORKSPACE}/scripts/results_python_program" >> ${report_file}
@@ -109,6 +112,7 @@ pipeline {
 	} 
 	else if (LANGUAGE=="Bash"){
 			 sh '''
+			 	report_file="${HOME}/Documents/Deployment/report"
 			 	echo "Only bash file was executed" >> ${report_file}
             			echo "Bash lang results $(cat "${WORKSPACE}/scripts/results_bash_program")" >> ${report_file}
 			 '''
@@ -116,6 +120,7 @@ pipeline {
 	}
 
 	    sh '''
+	    	report_file="${HOME}/Documents/Deployment/report"
 	      echo "#############################" >> ${report_file}
             '''
       }
